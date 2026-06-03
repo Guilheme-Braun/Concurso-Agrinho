@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroVerde News | Agrinho 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══ HEADER ══ -->
+  <header id="site-header">
+    <div class="header-top">
+      <span class="header-badge">🌱 Agrinho 2026 · Paraná</span>
+      <span class="header-date" id="live-date"></span>
+    </div>
+    <div class="header-main">
+      <svg class="logo-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="26" cy="26" r="25" fill="#1a4d2e" stroke="#c8a84b" stroke-width="1.5"/>
+        <path d="M26 42 C26 42 14 30 14 22 C14 16 19.5 11 26 11 C32.5 11 38 16 38 22 C38 30 26 42 26 42Z" fill="#4caf50"/>
+        <path d="M26 22 C26 22 20 18 20 14 C23 12 26 15 26 15" fill="#8bc34a"/>
+        <circle cx="26" cy="22" r="3" fill="#c8a84b"/>
+        <rect x="25" y="34" width="2" height="8" fill="#1a4d2e"/>
+      </svg>
+      <div class="logo-text">
+        <div class="logo-title">Agro<span>Verde</span> News</div>
+        <div class="logo-subtitle">Agro forte, futuro sustentável — Agrinho 2026</div>
+      </div>
+    </div>
+    <nav id="main-nav">
+      <button class="nav-tab active" data-tab="ideias">🌿 Ideias Sustentáveis</button>
+      <button class="nav-tab" data-tab="noticias">📰 Notícias Atuais</button>
+      <button class="nav-tab" data-tab="sobre">🏆 Sobre o Agrinho</button>
+    </nav>
+  </header>
+
+  <!-- ══ TICKER ══ -->
+  <div class="ticker-bar">
+    <div class="ticker-label">🌾 Urgente</div>
+    <div class="ticker-track">
+      <div class="ticker-content" id="ticker-content">
+        Carregando notícias…
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MAIN ══ -->
+  <main>
+
+    <!-- ════ TAB 1: IDEIAS ════ -->
+    <section class="tab-panel active" id="tab-ideias">
+
+      <div class="section-header">
+        <span class="section-kicker">Soluções</span>
+        <h2 class="section-title">Ideias para um Agro Sustentável</h2>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-visual">
+          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <pattern id="leaf-pat" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                <circle cx="20" cy="20" r="1.5" fill="#4caf50"/>
+                <path d="M20 8 C20 8 12 16 20 26 C28 16 20 8 20 8Z" fill="#2e7d32" opacity="0.6"/>
+              </pattern>
+            </defs>
+            <rect width="400" height="400" fill="url(#leaf-pat)"/>
+          </svg>
+          <div class="hero-visual-inner">
+            <span class="hero-emoji">🌾</span>
+            <div class="hero-visual-label">Equilíbrio</div>
+            <div class="hero-visual-subtitle">Produção &amp; Natureza</div>
+          </div>
+        </div>
+        <div class="hero-content">
+          <div class="card-kicker">🏆 Agrinho 2026 · Tema Central</div>
+          <h1 class="hero-headline">Agro Forte,<br/>Futuro Sustentável</h1>
+          <p class="hero-deck">
+            O Paraná convida seus estudantes a refletir sobre o equilíbrio entre a produção agropecuária e a preservação ambiental. Conheça as principais ideias que unem o campo à sustentabilidade.
+          </p>
+          <div class="hero-meta">Programa Agrinho · Faep/Senar-PR · Seed-PR</div>
+        </div>
+      </div>
+
+      <div class="ideas-grid" id="ideas-container"></div>
+
+      <div class="agrinho-quote">
+        <blockquote>
+          "O agronegócio sustentável é aquele que alimenta o mundo sem consumir o futuro das próximas gerações."
+        </blockquote>
+        <cite>— Reflexão Agrinho 2026 · Paraná</cite>
+      </div>
+
+    </section>
+
+    <!-- ════ TAB 2: NOTÍCIAS ════ -->
+    <section class="tab-panel" id="tab-noticias">
+
+      <div class="feed-header">
+        <div>
+          <span class="section-kicker">Últimas</span>
+          <h2 class="section-title section-title--sm">Notícias Ambientais</h2>
+        </div>
+        <div class="feed-filters">
+          <button class="filter-btn active" data-filter="todos">Todos</button>
+          <button class="filter-btn" data-filter="agbrasil">Ag. Brasil</button>
+          <button class="filter-btn" data-filter="gov">Gov. Federal</button>
+          <button class="filter-btn" data-filter="mma">MMA</button>
+        </div>
+      </div>
+
+      <div class="api-notice">
+        <strong>📡 Feed Dinâmico</strong> — As notícias abaixo são carregadas via RSS público da Agência Brasil e do Governo Federal. Devido às políticas de CORS dos navegadores, o feed é exibido via proxy público. Se a busca falhar, as notícias em destaque são exibidas automaticamente.
+      </div>
+
+      <div id="news-loading" class="loading-state">
+        <div class="spinner"></div>
+        <div class="loading-text">Buscando notícias ambientais…</div>
+      </div>
+
+      <div class="news-list" id="news-list" style="display:none;"></div>
+
+    </section>
+
+    <!-- ════ TAB 3: SOBRE ════ -->
+    <section class="tab-panel" id="tab-sobre">
+
+      <div class="section-header">
+        <span class="section-kicker">Programa</span>
+        <h2 class="section-title">Sobre o Agrinho 2026</h2>
+      </div>
+
+      <div class="hero-card hero-card--short">
+        <div class="hero-visual hero-visual--blue">
+          <div class="hero-visual-inner">
+            <span class="hero-emoji">🏆</span>
+          </div>
+        </div>
+        <div class="hero-content">
+          <div class="card-kicker">31 Anos de História</div>
+          <h2 class="hero-headline hero-headline--md">O maior programa educacional do Paraná</h2>
+          <p class="hero-deck">
+            Criado em 1995, o Programa Agrinho reúne anualmente cerca de
+            <strong class="highlight">800 mil estudantes</strong> e mais de
+            <strong class="highlight">50 mil professores</strong> de todos os municípios paranaenses.
+          </p>
+          <div class="hero-meta">Faep · Senar-PR · Seed-PR · Governo do Paraná</div>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="news-card">
+          <div class="card-thumb">
+            <div class="card-thumb-bg card-thumb-bg--green">✍️</div>
+          </div>
+          <div class="card-body">
+            <div class="card-kicker">Categoria</div>
+            <div class="card-headline">Redação Paraná Nota 10</div>
+            <div class="card-excerpt">Estudantes do Ensino Fundamental II e Médio produzem textos sobre agronegócio sustentável. Inscrições até 30 de junho pela plataforma Redação Paraná.</div>
+            <div class="card-meta">
+              <span><span class="card-source-dot"></span>Seed-PR</span>
+              <span>Jun/2026</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-thumb">
+            <div class="card-thumb-bg card-thumb-bg--blue">🤖</div>
+          </div>
+          <div class="card-body">
+            <div class="card-kicker">Categoria</div>
+            <div class="card-headline">AgroRobótica</div>
+            <div class="card-excerpt">Grupos de 5 alunos de colégios agrícolas constroem protótipos robóticos aplicados à agricultura sustentável. Inscrições: 27 jul a 6 ago/2026.</div>
+            <div class="card-meta">
+              <span><span class="card-source-dot"></span>Senar-PR</span>
+              <span>Ago/2026</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-thumb">
+            <div class="card-thumb-bg card-thumb-bg--yellow">🎨</div>
+          </div>
+          <div class="card-body">
+            <div class="card-kicker">Categoria</div>
+            <div class="card-headline">Desenho</div>
+            <div class="card-excerpt">Arte visual sobre o tema do ano, aberta a estudantes da educação infantil e fundamental. Uma das categorias mais tradicionais do programa.</div>
+            <div class="card-meta">
+              <span><span class="card-source-dot"></span>Agrinho</span>
+              <span>2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-logo">Agro<span>Verde</span> News</div>
+    <div class="footer-tagline">Agro forte, futuro sustentável · Agrinho 2026 · Paraná</div>
+    <div class="footer-credits">
+      Portal educativo desenvolvido para o Concurso Agrinho 2026 · Programa promovido por
+      <a href="https://www.agrinho.com.br" target="_blank" rel="noopener">Faep/Senar-PR</a> em parceria com a
+      <a href="https://www.educacao.pr.gov.br" target="_blank" rel="noopener">Seed-PR</a> e o
+      <a href="https://www.parana.pr.gov.br" target="_blank" rel="noopener">Governo do Paraná</a>.<br/>
+      Notícias: <a href="https://agenciabrasil.ebc.com.br" target="_blank" rel="noopener">Agência Brasil</a> ·
+      <a href="https://www.gov.br/mma" target="_blank" rel="noopener">Ministério do Meio Ambiente</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
