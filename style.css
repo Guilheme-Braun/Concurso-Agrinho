@@ -1,0 +1,99 @@
+/*
+ * =====================================================
+ *  Braun News — style.css
+ *  Portal Agrinho 2026
+ *  "Agro forte, futuro sustentável:
+ *   equilíbrio entre produção e meio ambiente"
+ * =====================================================
+ */
+
+/* ─────────────────────────────────────────────
+   VARIÁVEIS DE DESIGN (Design Tokens)
+   ───────────────────────────────────────────── */
+:root {
+  /* Paleta verde */
+  --verde-escuro:  #0d2b1a;
+  --verde-medio:   #1a4d2e;
+  --verde-vivo:    #2e7d32;
+  --verde-claro:   #4caf50;
+  --verde-lima:    #8bc34a;
+
+  /* Paleta dourada */
+  --dourado:       #c8a84b;
+  --dourado-claro: #f0c864;
+
+  /* Neutros / fundo */
+  --creme:         #f5f0e8;
+  --creme-escuro:  #ede5d0;
+  --branco:        #fdfcf8;
+
+  /* Texto */
+  --texto-escuro:  #1a1a14;
+  --texto-medio:   #3d3d2e;
+  --texto-claro:   #6b6b4f;
+
+  /* Sombra */
+  --sombra:        rgba(13, 43, 26, 0.15);
+}
+
+/* ─────────────────────────────────────────────
+   RESET E BASE
+   ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background-color: var(--creme);
+  color: var(--texto-escuro);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────────
+   TEXTURA DE GRÃO (efeito papel)
+   ───────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ─────────────────────────────────────────────
+   HEADER
+   ───────────────────────────────────────────── */
+#site-header {
+  background: var(--verde-escuro);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 3px solid var(--dourado);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 2rem;
+  border-bottom: 1px solid rgba(200, 168, 75, 0.3);
+}
+
+.header-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--dourado);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
