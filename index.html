@@ -3,11 +3,955 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Braun News | Agrinho 2026</title>
+  <title>AgroVerde News | Agrinho 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <style>
+/*
+ * =====================================================
+ *  AgroVerde News — style.css
+ *  Portal Agrinho 2026
+ *  "Agro forte, futuro sustentável:
+ *   equilíbrio entre produção e meio ambiente"
+ * =====================================================
+ */
+
+/* ─────────────────────────────────────────────
+   VARIÁVEIS DE DESIGN (Design Tokens)
+   ───────────────────────────────────────────── */
+:root {
+  /* Paleta verde */
+  --verde-escuro:  #0d2b1a;
+  --verde-medio:   #1a4d2e;
+  --verde-vivo:    #2e7d32;
+  --verde-claro:   #4caf50;
+  --verde-lima:    #8bc34a;
+
+  /* Paleta dourada */
+  --dourado:       #c8a84b;
+  --dourado-claro: #f0c864;
+
+  /* Neutros / fundo */
+  --creme:         #f5f0e8;
+  --creme-escuro:  #ede5d0;
+  --branco:        #fdfcf8;
+
+  /* Texto */
+  --texto-escuro:  #1a1a14;
+  --texto-medio:   #3d3d2e;
+  --texto-claro:   #6b6b4f;
+
+  /* Sombra */
+  --sombra:        rgba(13, 43, 26, 0.15);
+}
+
+/* ─────────────────────────────────────────────
+   RESET E BASE
+   ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background-color: var(--creme);
+  color: var(--texto-escuro);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────────
+   TEXTURA DE GRÃO (efeito papel)
+   ───────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ─────────────────────────────────────────────
+   HEADER
+   ───────────────────────────────────────────── */
+#site-header {
+  background: var(--verde-escuro);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 3px solid var(--dourado);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 2rem;
+  border-bottom: 1px solid rgba(200, 168, 75, 0.3);
+}
+
+.header-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--dourado);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.header-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: rgba(245, 240, 232, 0.5);
+  letter-spacing: 0.08em;
+}
+
+.header-main {
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Logo */
+.logo-icon {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--creme);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.logo-title span {
+  color: var(--dourado);
+}
+
+.logo-subtitle {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--verde-lima);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+}
+
+/* ─────────────────────────────────────────────
+   NAVEGAÇÃO — ABAS
+   ───────────────────────────────────────────── */
+nav#main-nav {
+  background: var(--verde-medio);
+  padding: 0 2rem;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+nav#main-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-tab {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.65);
+  padding: 0.9rem 1.5rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  white-space: nowrap;
+  position: relative;
+  transition: color 0.25s;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--dourado);
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+}
+
+.nav-tab:hover {
+  color: var(--creme);
+}
+
+.nav-tab:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-tab.active {
+  color: var(--dourado-claro);
+  border-bottom-color: var(--dourado);
+}
+
+.nav-tab.active::after {
+  transform: scaleX(1);
+}
+
+/* ─────────────────────────────────────────────
+   TICKER DE MANCHETES
+   ───────────────────────────────────────────── */
+.ticker-bar {
+  background: var(--dourado);
+  padding: 0.45rem 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.ticker-label {
+  background: var(--verde-escuro);
+  color: var(--dourado);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 0.2rem 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.ticker-track {
+  flex: 1;
+  overflow: hidden;
+}
+
+.ticker-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker 35s linear infinite;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--verde-escuro);
+  font-weight: 700;
+  padding-left: 2rem;
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT PRINCIPAL
+   ───────────────────────────────────────────── */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ─────────────────────────────────────────────
+   ABAS (PAINÉIS)
+   ───────────────────────────────────────────── */
+.tab-panel {
+  display: none;
+  animation: fadeUp 0.4s ease forwards;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─────────────────────────────────────────────
+   CABEÇALHOS DE SEÇÃO
+   ───────────────────────────────────────────── */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--verde-escuro);
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--verde-escuro);
+  letter-spacing: -0.02em;
+}
+
+.section-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--verde-vivo);
+  font-weight: 700;
+}
+
+/* ─────────────────────────────────────────────
+   HERO CARD
+   ───────────────────────────────────────────── */
+.hero-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: var(--verde-escuro);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 40px var(--sombra);
+  min-height: 380px;
+}
+
+.hero-visual {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a4d2e 0%, #0d2b1a 60%, #2e7d32 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-visual svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+}
+
+.hero-visual-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-emoji {
+  font-size: 5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+.hero-content {
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--creme);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.hero-deck {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: rgba(245, 240, 232, 0.75);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.hero-meta {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: rgba(245, 240, 232, 0.4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────────────
+   GRID DE CARDS (notícias / categorias)
+   ───────────────────────────────────────────── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.news-card {
+  background: var(--branco);
+  border: 1px solid var(--creme-escuro);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px var(--sombra);
+}
+
+/* Thumbnail do card */
+.card-thumb {
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-thumb-bg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  transition: transform 0.3s;
+}
+
+.news-card:hover .card-thumb-bg {
+  transform: scale(1.08);
+}
+
+/* Corpo do card */
+.card-body {
+  padding: 1.2rem;
+}
+
+.card-body .card-kicker {
+  color: var(--verde-vivo);
+  margin-bottom: 0.5rem;
+}
+
+.card-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--texto-escuro);
+  line-height: 1.3;
+  margin-bottom: 0.6rem;
+}
+
+.card-excerpt {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--texto-claro);
+  line-height: 1.65;
+  margin-bottom: 0.8rem;
+}
+
+.card-meta {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--texto-claro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--creme-escuro);
+  padding-top: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-source-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--verde-vivo);
+  margin-right: 0.4rem;
+}
+
+/* ─────────────────────────────────────────────
+   SEÇÃO DE IDEIAS SUSTENTÁVEIS (Aba 1)
+   ───────────────────────────────────────────── */
+.ideas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.idea-card {
+  background: var(--branco);
+  border-left: 4px solid var(--verde-vivo);
+  padding: 1.8rem;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 2px 12px var(--sombra);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.idea-card:hover {
+  border-left-color: var(--dourado);
+  transform: translateX(4px);
+}
+
+.idea-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--creme-escuro);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.idea-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--verde-vivo);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.idea-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--texto-escuro);
+  line-height: 1.3;
+  margin-bottom: 0.7rem;
+}
+
+.idea-text {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--texto-medio);
+  line-height: 1.75;
+}
+
+.idea-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+/* ─────────────────────────────────────────────
+   CITAÇÃO / BLOCKQUOTE
+   ───────────────────────────────────────────── */
+.agrinho-quote {
+  background: var(--verde-escuro);
+  color: var(--creme);
+  padding: 3rem 3.5rem;
+  margin: 2rem 0;
+  position: relative;
+  border-radius: 2px;
+}
+
+.agrinho-quote::before {
+  content: '\201C'; /* " */
+  font-family: 'Playfair Display', serif;
+  font-size: 8rem;
+  color: var(--dourado);
+  opacity: 0.3;
+  position: absolute;
+  top: -1rem;
+  left: 1.5rem;
+  line-height: 1;
+}
+
+.agrinho-quote blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--creme);
+  position: relative;
+  z-index: 1;
+}
+
+.agrinho-quote cite {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  margin-top: 1.2rem;
+  font-style: normal;
+}
+
+/* ─────────────────────────────────────────────
+   FEED DE NOTÍCIAS (Aba 2)
+   ───────────────────────────────────────────── */
+.feed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0 1rem;
+  border-bottom: 2px solid var(--verde-escuro);
+  margin-bottom: 1.5rem;
+}
+
+.feed-filters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Botões de filtro */
+.filter-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--verde-vivo);
+  background: none;
+  color: var(--verde-vivo);
+  cursor: pointer;
+  border-radius: 1px;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--verde-vivo);
+  color: var(--branco);
+}
+
+/* Lista de notícias */
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.news-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--creme-escuro);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.news-item:hover {
+  background: rgba(46, 125, 50, 0.03);
+}
+
+.news-item-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--creme-escuro);
+  line-height: 1;
+  width: 2.5rem;
+  text-align: right;
+}
+
+.news-item-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.news-item-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--texto-escuro);
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+}
+
+.news-item-summary {
+  font-size: 0.84rem;
+  font-weight: 300;
+  color: var(--texto-claro);
+  line-height: 1.65;
+}
+
+.news-item-meta {
+  text-align: right;
+  min-width: 100px;
+}
+
+.news-item-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--texto-claro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Tags de fonte */
+.source-tag {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 1px;
+  font-weight: 700;
+}
+
+.source-agbrasil {
+  background: #1a4d2e;
+  color: var(--verde-lima);
+}
+
+.source-gov {
+  background: #0d2b6e;
+  color: #90caf9;
+}
+
+.source-mma {
+  background: #4a1a00;
+  color: #ffcc80;
+}
+
+/* ─────────────────────────────────────────────
+   ESTADO DE CARREGAMENTO
+   ───────────────────────────────────────────── */
+.loading-state {
+  padding: 3rem;
+  text-align: center;
+}
+
+.spinner {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--creme-escuro);
+  border-top-color: var(--verde-vivo);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--texto-claro);
+  margin-top: 1rem;
+}
+
+/* ─────────────────────────────────────────────
+   AVISO / NOTICE (API)
+   ───────────────────────────────────────────── */
+.api-notice {
+  background: var(--creme-escuro);
+  border: 1px dashed var(--dourado);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+  font-size: 0.82rem;
+  color: var(--texto-medio);
+  font-style: italic;
+}
+
+.api-notice strong {
+  font-style: normal;
+  color: var(--verde-vivo);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────────────
+   RODAPÉ
+   ───────────────────────────────────────────── */
+footer {
+  background: var(--verde-escuro);
+  color: rgba(245, 240, 232, 0.5);
+  margin-top: 4rem;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border-top: 3px solid var(--dourado);
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--creme);
+  margin-bottom: 0.5rem;
+}
+
+.footer-logo span {
+  color: var(--dourado);
+}
+
+.footer-tagline {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--verde-lima);
+  margin-bottom: 1.5rem;
+}
+
+.footer-credits {
+  font-size: 0.78rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.footer-credits a {
+  color: var(--dourado);
+  text-decoration: none;
+}
+
+.footer-credits a:hover {
+  text-decoration: underline;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVIDADE — MOBILE
+   ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Header */
+  .header-main       { padding: 1rem; }
+  .logo-title        { font-size: 1.6rem; }
+  nav#main-nav       { padding: 0 1rem; }
+
+  /* Layout */
+  main               { padding: 0 1rem; }
+
+  /* Hero */
+  .hero-card         { grid-template-columns: 1fr; }
+  .hero-visual       { min-height: 200px; }
+  .hero-headline     { font-size: 1.4rem; }
+
+  /* Grids */
+  .cards-grid        { grid-template-columns: 1fr; }
+  .ideas-grid        { grid-template-columns: 1fr; }
+
+  /* Lista de notícias */
+  .news-item         { grid-template-columns: 1fr; }
+  .news-item-num     { display: none; }
+  .news-item-meta    { text-align: left; }
+
+  /* Feed header */
+  .feed-header       { flex-direction: column; align-items: flex-start; gap: 1rem; }
+
+  /* Citação */
+  .agrinho-quote     { padding: 2rem 1.5rem; }
+  .agrinho-quote blockquote { font-size: 1.2rem; }
+
+  /* Filtros */
+  .feed-filters      { flex-wrap: wrap; }
+}
+
+@media (max-width: 480px) {
+  .logo-subtitle     { display: none; }
+  .header-badge      { font-size: 0.55rem; }
+  .cards-grid        { grid-template-columns: 1fr; }
+}
+
+/* ─────────────────────────────────────────────
+   CLASSES MODIFICADORAS (BEM-like modifiers)
+   ───────────────────────────────────────────── */
+
+/* Hero card menor (aba Sobre) */
+.hero-card--short {
+  min-height: 280px;
+}
+
+/* Hero visual azul-escuro (aba Sobre) */
+.hero-visual--blue {
+  background: linear-gradient(135deg, #0d2b6e, #0d2b1a) !important;
+}
+
+/* Texto destacado em dourado dentro do hero */
+.highlight {
+  color: var(--dourado);
+}
+
+/* Título de seção menor (feed de notícias) */
+.section-title--sm {
+  font-size: 1.4rem;
+}
+
+/* Headline menor (aba Sobre) */
+.hero-headline--md {
+  font-size: 1.6rem;
+}
+
+/* Labels internos do hero visual */
+.hero-visual-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  margin-top: 0.5rem;
+}
+
+.hero-visual-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--creme);
+  margin-top: 0.3rem;
+}
+
+/* Cores de fundo dos thumbnails dos cards */
+.card-thumb-bg--green  { background: #e8f5e9; }
+.card-thumb-bg--blue   { background: #e3f2fd; }
+.card-thumb-bg--yellow { background: #fff8e1; }
+
+  </style>
 </head>
 <body>
 
@@ -214,6 +1158,466 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+/**
+ * AgroVerde News — script.js
+ * Portal de Notícias · Agrinho 2026
+ * "Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente"
+ *
+ * Responsabilidades:
+ *  1. Navegação por abas
+ *  2. Data/hora ao vivo no header
+ *  3. Ticker de notícias
+ *  4. Renderização das ideias sustentáveis (dados estáticos)
+ *  5. Busca de notícias via RSS (Agência Brasil + Gov.br) com fallback curado
+ *  6. Filtros por fonte
+ */
+
+/* ─────────────────────────────────────────────
+   1. DADOS ESTÁTICOS — IDEIAS SUSTENTÁVEIS
+   ───────────────────────────────────────────── */
+const IDEAS = [
+  {
+    num: "01",
+    tag: "Água",
+    icon: "💧",
+    title: "Irrigação de Precisão e Reuso de Água",
+    text: "Sensores de umidade do solo conectados a sistemas automatizados reduzem em até 50% o consumo de água nas lavouras. O reaproveitamento de água da chuva em cisternas rurais garante produção mesmo em períodos de estiagem, aliviando rios e aquíferos.",
+    color: "#e3f2fd",
+  },
+  {
+    num: "02",
+    tag: "Solo",
+    icon: "🌱",
+    title: "Plantio Direto e Agricultura de Conservação",
+    text: "O sistema de plantio direto mantém a palhada sobre o solo, reduz a erosão em até 90% e aumenta o carbono orgânico. Em parceria com o Programa Paraná Mais Verde, produtores recebem assistência técnica para adoção dessas práticas.",
+    color: "#e8f5e9",
+  },
+  {
+    num: "03",
+    tag: "Energia",
+    icon: "☀️",
+    title: "Bioenergia e Energia Solar nas Propriedades",
+    text: "O Brasil é líder mundial em biocombustíveis. Pequenas propriedades rurais podem gerar eletricidade com biogás de dejetos animais e painéis solares fotovoltaicos, reduzindo custos de produção e emissões de CO₂ ao mesmo tempo.",
+    color: "#fff8e1",
+  },
+  {
+    num: "04",
+    tag: "Floresta",
+    icon: "🌳",
+    title: "Integração Lavoura-Pecuária-Floresta (iLPF)",
+    text: "O sistema iLPF integra pastagens, culturas agrícolas e árvores na mesma área. Aumenta a biodiversidade, recupera solos degradados, captura carbono e ainda diversifica a renda do produtor rural — um modelo premiado internacionalmente.",
+    color: "#f3e5f5",
+  },
+  {
+    num: "05",
+    tag: "Resíduos",
+    icon: "♻️",
+    title: "Logística Reversa de Embalagens Agroquímicas",
+    text: "O Brasil possui um dos sistemas de devolução de embalagens de agrotóxicos mais eficientes do mundo. Ampliar pontos de coleta, conscientizar produtores e investir em reciclagem fecha o ciclo e protege solos e nascentes.",
+    color: "#e8f5e9",
+  },
+  {
+    num: "06",
+    tag: "Tecnologia",
+    icon: "🛰️",
+    title: "Agrotecnologia: Drones, IA e Sensoriamento Remoto",
+    text: "Drones aplicam defensivos apenas onde necessário, reduzindo o uso em até 40%. Satélites monitoram desmatamento em tempo real. Inteligência Artificial analisa imagens de satélite para alertar sobre pragas antes que se alastrem.",
+    color: "#e3f2fd",
+  },
+  {
+    num: "07",
+    tag: "Comunidade",
+    icon: "👩‍🌾",
+    title: "Agricultura Familiar e Feiras Orgânicas",
+    text: "Fortalecer a agricultura familiar com acesso a mercados locais reduz emissões do transporte, mantém comunidades rurais vivas e garante alimentos saudáveis sem agrotóxicos. Escolas podem criar hortas pedagógicas e consumir o que produzem.",
+    color: "#fff8e1",
+  },
+  {
+    num: "08",
+    tag: "Educação",
+    icon: "📚",
+    title: "Educação Ambiental nas Escolas do Campo",
+    text: "Programas como o Agrinho mostram que a escola é o principal vetor de mudança cultural. Projetos de compostagem, hortas escolares e visitas técnicas a propriedades sustentáveis formam cidadãos conscientes do papel do campo na vida de todos.",
+    color: "#fce4ec",
+  },
+];
+
+/* ─────────────────────────────────────────────
+   2. NOTÍCIAS DE FALLBACK (exibidas se RSS falhar)
+   ───────────────────────────────────────────── */
+const FALLBACK_NEWS = [
+  {
+    source: "agbrasil",
+    sourceName: "Ag. Brasil",
+    sourceClass: "source-agbrasil",
+    kicker: "Meio Ambiente",
+    kickerColor: "#2e7d32",
+    headline: "Brasil bate recorde de áreas em recuperação ambiental em 2025",
+    summary: "Segundo dados do Ministério do Meio Ambiente, o país atingiu 7,5 milhões de hectares em processo de restauração florestal, o maior índice desde o início do monitoramento pelo SINAFLOR.",
+    date: "Mai 2026",
+    url: "https://agenciabrasil.ebc.com.br/meio-ambiente",
+  },
+  {
+    source: "gov",
+    sourceName: "Gov. Federal",
+    sourceClass: "source-gov",
+    kicker: "Agricultura",
+    kickerColor: "#1565c0",
+    headline: "Governo lança programa de crédito rural verde com juros reduzidos",
+    summary: "O Programa ABC+ (Agricultura de Baixo Carbono Plus) disponibilizará R$ 35 bilhões para propriedades que adotarem práticas sustentáveis como plantio direto, iLPF e bioinsumos.",
+    date: "Mai 2026",
+    url: "https://www.gov.br/mma",
+  },
+  {
+    source: "mma",
+    sourceName: "MMA",
+    sourceClass: "source-mma",
+    kicker: "Clima",
+    kickerColor: "#e65100",
+    headline: "Desmatamento na Amazônia cai 45% no primeiro trimestre de 2026",
+    summary: "Dados do PRODES/INPE indicam redução expressiva no desmatamento. O Ministério do Meio Ambiente atribui a queda à fiscalização reforçada, ao monitoramento por satélite e aos programas de bioeconomia.",
+    date: "Abr 2026",
+    url: "https://www.gov.br/mma/pt-br/assuntos/noticias",
+  },
+  {
+    source: "agbrasil",
+    sourceName: "Ag. Brasil",
+    sourceClass: "source-agbrasil",
+    kicker: "Energia",
+    kickerColor: "#2e7d32",
+    headline: "Usinas de biogás rurais crescem 60% no Paraná em 2025",
+    summary: "O Paraná lidera o ranking nacional de geração de biogás a partir de resíduos agrícolas e suinocultura, com mais de 400 unidades em operação e potencial de abastecer 300 mil residências.",
+    date: "Abr 2026",
+    url: "https://agenciabrasil.ebc.com.br/meio-ambiente",
+  },
+  {
+    source: "gov",
+    sourceName: "Gov. Federal",
+    sourceClass: "source-gov",
+    kicker: "Tecnologia",
+    kickerColor: "#1565c0",
+    headline: "Embrapa lança variedades de soja tolerantes à seca para o Cerrado",
+    summary: "As novas cultivares consomem até 30% menos água e mantêm produtividade em anos com déficit hídrico, contribuindo para a resiliência climática da agricultura brasileira.",
+    date: "Mar 2026",
+    url: "https://www.embrapa.br/noticias",
+  },
+  {
+    source: "agbrasil",
+    sourceName: "Ag. Brasil",
+    sourceClass: "source-agbrasil",
+    kicker: "Água",
+    kickerColor: "#2e7d32",
+    headline: "Lei do Pagamento por Serviços Ambientais avança na regulamentação",
+    summary: "O decreto regulamentador da Lei 14.119/2021 permitirá que produtores rurais que preservam matas ciliares, nascentes e APP recebam compensação financeira do poder público e da iniciativa privada.",
+    date: "Mar 2026",
+    url: "https://agenciabrasil.ebc.com.br/meio-ambiente",
+  },
+  {
+    source: "mma",
+    sourceName: "MMA",
+    sourceClass: "source-mma",
+    kicker: "Biodiversidade",
+    kickerColor: "#e65100",
+    headline: "COP16 define metas para restauração de ecossistemas até 2030",
+    summary: "O Brasil assumiu o compromisso de restaurar 12 milhões de hectares de vegetação nativa e zerar o desmatamento ilegal até 2030, alinhando-se às metas do Acordo de Kunming-Montreal.",
+    date: "Fev 2026",
+    url: "https://www.gov.br/mma/pt-br/assuntos/noticias",
+  },
+  {
+    source: "agbrasil",
+    sourceName: "Ag. Brasil",
+    sourceClass: "source-agbrasil",
+    kicker: "Agronegócio",
+    kickerColor: "#2e7d32",
+    headline: "Rastreabilidade de gado na Amazônia se expande para toda a cadeia",
+    summary: "O sistema de rastreabilidade bovina foi ampliado para incluir subfornecedores, eliminando o chamado 'boi lavado' e garantindo que o Brasil exporte carne produzida em áreas sem desmatamento.",
+    date: "Jan 2026",
+    url: "https://agenciabrasil.ebc.com.br/meio-ambiente",
+  },
+];
+
+/* ─────────────────────────────────────────────
+   3. RSS FEEDS (via proxy CORS público)
+   ───────────────────────────────────────────── */
+const RSS_FEEDS = [
+  {
+    url: "https://agenciabrasil.ebc.com.br/rss/meio-ambiente/feed.xml",
+    source: "agbrasil",
+    sourceName: "Ag. Brasil",
+    sourceClass: "source-agbrasil",
+    kickerColor: "#2e7d32",
+  },
+  {
+    url: "https://www.gov.br/mma/pt-br/assuntos/noticias/RSS",
+    source: "mma",
+    sourceName: "MMA",
+    sourceClass: "source-mma",
+    kickerColor: "#e65100",
+  },
+];
+
+const CORS_PROXY = "https://api.allorigins.win/get?url=";
+
+/* ─────────────────────────────────────────────
+   4. ESTADO DA APLICAÇÃO
+   ───────────────────────────────────────────── */
+let allNews = [];
+let currentFilter = "todos";
+
+/* ─────────────────────────────────────────────
+   5. UTILITÁRIOS
+   ───────────────────────────────────────────── */
+
+/** Formata data do RSS para exibição legível */
+function formatDate(dateStr) {
+  if (!dateStr) return "Recente";
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
+  } catch {
+    return dateStr.slice(0, 10) || "Recente";
+  }
+}
+
+/** Remove tags HTML de uma string */
+function stripHTML(str) {
+  if (!str) return "";
+  return str.replace(/<[^>]*>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
+}
+
+/** Trunca texto em N caracteres */
+function truncate(str, n = 160) {
+  const clean = stripHTML(str);
+  return clean.length > n ? clean.slice(0, n).trimEnd() + "…" : clean;
+}
+
+/* ─────────────────────────────────────────────
+   6. DATA/HORA AO VIVO
+   ───────────────────────────────────────────── */
+function updateClock() {
+  const el = document.getElementById("live-date");
+  if (!el) return;
+  const now = new Date();
+  el.textContent = now.toLocaleDateString("pt-BR", {
+    weekday: "long",
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+/* ─────────────────────────────────────────────
+   7. TICKER
+   ───────────────────────────────────────────── */
+function updateTicker(items) {
+  const el = document.getElementById("ticker-content");
+  if (!el) return;
+  const headlines = items.slice(0, 6).map((n) => `🌿 ${n.headline}`).join("  ·  ");
+  el.textContent = headlines || "Agrinho 2026 · Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente";
+}
+
+/* ─────────────────────────────────────────────
+   8. RENDERIZAR IDEIAS
+   ───────────────────────────────────────────── */
+function renderIdeas() {
+  const container = document.getElementById("ideas-container");
+  if (!container) return;
+
+  container.innerHTML = IDEAS.map(
+    (idea) => `
+    <article class="idea-card">
+      <span class="idea-icon">${idea.icon}</span>
+      <div class="idea-number">${idea.num}</div>
+      <div class="idea-tag">${idea.tag}</div>
+      <h3 class="idea-title">${idea.title}</h3>
+      <p class="idea-text">${idea.text}</p>
+    </article>
+  `
+  ).join("");
+}
+
+/* ─────────────────────────────────────────────
+   9. RENDERIZAR NOTÍCIAS
+   ───────────────────────────────────────────── */
+function renderNews(items) {
+  const list = document.getElementById("news-list");
+  const loading = document.getElementById("news-loading");
+  if (!list) return;
+
+  loading.style.display = "none";
+  list.style.display = "flex";
+
+  const filtered =
+    currentFilter === "todos"
+      ? items
+      : items.filter((n) => n.source === currentFilter);
+
+  if (filtered.length === 0) {
+    list.innerHTML = `<div style="padding:2rem;text-align:center;font-style:italic;color:var(--texto-claro);">Nenhuma notícia encontrada para este filtro.</div>`;
+    return;
+  }
+
+  list.innerHTML = filtered
+    .map(
+      (item, idx) => `
+    <article class="news-item" onclick="window.open('${item.url || "#"}','_blank')">
+      <div class="news-item-num">${String(idx + 1).padStart(2, "0")}</div>
+      <div class="news-item-body">
+        <div class="news-item-kicker" style="color:${item.kickerColor || "var(--verde-vivo)"}">
+          ${item.kicker || "Meio Ambiente"}
+        </div>
+        <div class="news-item-headline">${item.headline}</div>
+        <div class="news-item-summary">${item.summary}</div>
+      </div>
+      <div class="news-item-meta">
+        <div class="news-item-date">${item.date}</div>
+        <span class="source-tag ${item.sourceClass}">${item.sourceName}</span>
+      </div>
+    </article>
+  `
+    )
+    .join("");
+}
+
+/* ─────────────────────────────────────────────
+   10. BUSCAR RSS
+   ───────────────────────────────────────────── */
+async function fetchRSSFeed(feedConfig) {
+  const proxyUrl = `${CORS_PROXY}${encodeURIComponent(feedConfig.url)}`;
+  const response = await fetch(proxyUrl, { signal: AbortSignal.timeout(8000) });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  const data = await response.json();
+  const xmlStr = data.contents;
+
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(xmlStr, "text/xml");
+  const items = xmlDoc.querySelectorAll("item");
+
+  const results = [];
+  items.forEach((item) => {
+    const headline = stripHTML(item.querySelector("title")?.textContent || "");
+    const summary = truncate(
+      item.querySelector("description")?.textContent || ""
+    );
+    const dateRaw = item.querySelector("pubDate")?.textContent || "";
+    const url = item.querySelector("link")?.textContent || "";
+    const category =
+      item.querySelector("category")?.textContent || "Meio Ambiente";
+
+    if (headline) {
+      results.push({
+        source: feedConfig.source,
+        sourceName: feedConfig.sourceName,
+        sourceClass: feedConfig.sourceClass,
+        kicker: stripHTML(category).slice(0, 30),
+        kickerColor: feedConfig.kickerColor,
+        headline,
+        summary,
+        date: formatDate(dateRaw),
+        url,
+      });
+    }
+  });
+
+  return results.slice(0, 10); // máx 10 por feed
+}
+
+async function loadAllNews() {
+  const loading = document.getElementById("news-loading");
+  loading.style.display = "flex";
+
+  try {
+    const promises = RSS_FEEDS.map((feed) =>
+      fetchRSSFeed(feed).catch(() => []) // feed individual que falha retorna []
+    );
+    const results = await Promise.all(promises);
+    const fetched = results.flat();
+
+    if (fetched.length > 0) {
+      // Mescla RSS com fallback curado (sem duplicar por headline)
+      const fetchedHeadlines = new Set(fetched.map((n) => n.headline));
+      const extras = FALLBACK_NEWS.filter(
+        (n) => !fetchedHeadlines.has(n.headline)
+      );
+      allNews = [...fetched, ...extras];
+    } else {
+      allNews = FALLBACK_NEWS;
+    }
+  } catch {
+    allNews = FALLBACK_NEWS;
+  }
+
+  renderNews(allNews);
+  updateTicker(allNews);
+}
+
+/* ─────────────────────────────────────────────
+   11. FILTROS
+   ───────────────────────────────────────────── */
+function initFilters() {
+  document.querySelectorAll(".filter-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentFilter = btn.dataset.filter;
+      renderNews(allNews);
+    });
+  });
+}
+
+/* ─────────────────────────────────────────────
+   12. NAVEGAÇÃO POR ABAS
+   ───────────────────────────────────────────── */
+function initTabs() {
+  const tabs = document.querySelectorAll(".nav-tab");
+  const panels = document.querySelectorAll(".tab-panel");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.tab;
+
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      panels.forEach((p) => {
+        p.classList.remove("active");
+        if (p.id === `tab-${target}`) {
+          p.classList.add("active");
+        }
+      });
+
+      // Lazy-load notícias só quando a aba é aberta pela primeira vez
+      if (target === "noticias" && allNews.length === 0) {
+        loadAllNews();
+      }
+    });
+  });
+}
+
+/* ─────────────────────────────────────────────
+   13. INICIALIZAÇÃO
+   ───────────────────────────────────────────── */
+document.addEventListener("DOMContentLoaded", () => {
+  updateClock();
+  setInterval(updateClock, 60_000);
+
+  renderIdeas();
+  initTabs();
+  initFilters();
+
+  // Ticker padrão até notícias carregarem
+  updateTicker([
+    { headline: "Agrinho 2026 · Inscrições abertas para Redação Paraná Nota 10 até 30 de junho" },
+    { headline: "Tema: Agro forte, futuro sustentável — equilíbrio entre produção e meio ambiente" },
+    { headline: "AgroRobótica: inscrições de 27 jul a 6 ago/2026" },
+    { headline: "Programa completa 31 anos mobilizando 800 mil estudantes no Paraná" },
+  ]);
+
+  // Pré-carrega notícias em background para o ticker
+  loadAllNews();
+});
+
+  </script>
 </body>
 </html>
